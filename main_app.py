@@ -15,7 +15,7 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 
 db.init_app(app)
-app.register_blueprint(fed, url_prefix='/fed')
+app.register_blueprint(fed, url_prefix='/fed', template_folder='tepmlates')
 
 
 @app.route('/')

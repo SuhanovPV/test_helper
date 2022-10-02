@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+        {% if title %}
+            <title>TEST HELPER: {{ title }}</title>
+        {% else %}
+            <title>TEST HELPER: </title>
+        {% endif %}
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+    {% block mainmenu %}
+    <nav>
+        <ul>
+            {% for m in menu %}
+                <li><a href="{{ url_for(m.url) }}">{{ m.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </nav>
+    {% endblock %}
+{% endblock %}
+</body>
+</html>

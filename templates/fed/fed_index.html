@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content%}
+    {{ super() }}
+    <div>
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+            {% for field in form if field.name not in ['csrf_token', 'submit'] %}
+                <p>
+                    {{ field.label() }}
+                    {% if field.errors %}
+                        {{ field(class="invalid") }}
+                        {% for e in field.errors %}
+                            {{ e }}
+                        {% endfor %}
+                    {% else %}
+                        {{ field() }}
+                    {% endif %}
+                </p>
+            {% endfor %}
+        </form>
+    </div>
+{% endblock %}
