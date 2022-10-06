@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from models.models_db import db
+from models.models import db
 from fed.fed import fed
 
 # https://stackoverflow.com/questions/9692962/flask-sqlalchemy-import-context-issue/9695045#9695045
@@ -14,8 +14,8 @@ menu = [{'title': 'Главная', 'url': 'index'},
 app = Flask(__name__)
 app.config.from_object(__name__)
 
-db.init_app(app)
-app.register_blueprint(fed, url_prefix='/fed', template_folder='tepmlates')
+db.init_app(app=app)
+app.register_blueprint(fed, url_prefix='/fed', template_folder='tepmlates', static_folder='static')
 
 
 @app.route('/')

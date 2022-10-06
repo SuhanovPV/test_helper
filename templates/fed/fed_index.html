@@ -2,21 +2,29 @@
 {% block content%}
     {{ super() }}
     <div>
+        <script  type="text/javascript" src="{{ url_for('static', filename='js/make_visible.js') }}"></script>
+
         <form action="" method="post">
-            {{ form.hidden_tag() }}
-            {% for field in form if field.name not in ['csrf_token', 'submit'] %}
-                <p>
-                    {{ field.label() }}
-                    {% if field.errors %}
-                        {{ field(class="invalid") }}
-                        {% for e in field.errors %}
-                            {{ e }}
-                        {% endfor %}
-                    {% else %}
-                        {{ field() }}
-                    {% endif %}
-                </p>
+            {{ form.version }}
+            <hr>
+            {% for f in form if f.id[:8] == 'schedule' %}
+                {% set div_class = 'invisible' %}
+                {% if f.visible.data %}
+                    {% set div_class = "visible" %}
+                {% endif %}
+                <div class="{{ div_class }}">
+                    {{ f.csrf_token }}
+                    <p style="display: none">{{f.visible}}</p>
+                    {% for field in f if field.name.split('-')[1] not in ['visible', 'csrf_token'] %}
+                        <p>{{ field.label }} {{ field }}<p>
+                    {% endfor %}
+                </div>
+                <hr>
             {% endfor %}
+            <input type="button" value="Добавить событие" onclick="makeVisible()">
+            <hr>
+            {{ form.submit }}
         </form>
     </div>
+
 {% endblock %}

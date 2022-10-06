@@ -1,4 +1,6 @@
-from models_db import db
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
 
 
 class Channels(db.Model):
