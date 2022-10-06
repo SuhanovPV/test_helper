@@ -17,12 +17,12 @@ def index():
     for f in form:
         if f.name[:8] == 'schedule':
             f.channel_id.choices = data_formatter.get_channel_list()
+            f.content.choices = data_formatter.get_genres_list()
 
     if request.method == 'POST':
         is_valid = True
         for f in form:
             if not f.validate(f) and f.name not in ['submit', 'csrf_token']:
-                print(f.errors)
                 is_valid = False
         if is_valid:
             return "ПРИВЕТ"

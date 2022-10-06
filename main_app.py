@@ -20,7 +20,7 @@ app.register_blueprint(fed, url_prefix='/fed', template_folder='tepmlates', stat
 
 @app.route('/')
 def index():
-    return render_template('index.html', title="Главаня", menu=menu)
+    return render_template('index.html', title="Главная", menu=menu)
 
 
 if __name__ == "__main__":

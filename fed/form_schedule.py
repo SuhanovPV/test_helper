@@ -1,26 +1,33 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateTimeField, IntegerField, SelectField, TextAreaField, FormField, SubmitField, \
-    BooleanField
-from wtforms.validators import DataRequired, NumberRange, ValidationError
+from wtforms import StringField, IntegerField, SelectField, TextAreaField, FormField, SubmitField, \
+    BooleanField, DateTimeLocalField
+from wtforms.validators import NumberRange, ValidationError
 from wtforms.widgets import DateTimeLocalInput
 from datetime import datetime, timedelta
+
 
 def required_if_visible(form, field):
     if form.visible.data and not field.data:
         raise ValidationError("Поле не может быть пустым")
 
 
+def value_in_range_if_set(form, field, min_val, max_val):
+    if form.visible.data and not field.data:
+        if field.data > max_val or field.data < min_val:
+            raise ValidationError(f"Значение должно быть в диапазоне от {min_val} до {max_val} включительно")
+
+
 class Schedule(FlaskForm):
     visible = BooleanField("Visible")
     title = StringField("Заголовок", validators=[required_if_visible])
-    start_time = DateTimeField("Начало", default=datetime.now() + timedelta(minutes=5),
-                               validators=[required_if_visible], widget=DateTimeLocalInput())
-    end_time = DateTimeField("Конец", default=datetime.now() + timedelta(minutes=10),
-                             validators=[required_if_visible], widget=DateTimeLocalInput())
+    start_time = DateTimeLocalField("Начало", default=datetime.now() + timedelta(minutes=5),
+                                    validators=[required_if_visible], widget=DateTimeLocalInput())
+    end_time = DateTimeLocalField("Конец", default=datetime.now() + timedelta(minutes=10),
+                                  validators=[required_if_visible], widget=DateTimeLocalInput())
     channel_id = SelectField("Канал", choices=[])
-    # content = IntegerField("Категория")
-    # parental_rating = IntegerField("Возрастное ограничение", default=None,
-    #                                validators=[NumberRange(min=0, max=18, message="Значения могут быть от 0 до 18")])
+    content = SelectField("Категория", choices=[])
+    # parental_rating = IntegerField("Возрастное ограничение", default=0,
+    #                                validators=[value_in_range_if_set(min_val=0, max_val=18)])
     # episode_number = StringField("Номер эпизода: ")
     # production_date = StringField("Дата выпуска программы")
     # star_rating = StringField("Рейтинг события")

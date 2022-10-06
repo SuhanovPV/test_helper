@@ -5,6 +5,7 @@
         <script  type="text/javascript" src="{{ url_for('static', filename='js/make_visible.js') }}"></script>
 
         <form action="" method="post">
+
             {{ form.version }}
             <hr>
             {% for f in form if f.id[:8] == 'schedule' %}
@@ -16,11 +17,15 @@
                     {{ f.csrf_token }}
                     <p style="display: none">{{f.visible}}</p>
                     {% for field in f if field.name.split('-')[1] not in ['visible', 'csrf_token'] %}
+                        {% if field.errors %}
+                            {% for e in field.errors %}
+                                <p>{{ e }}</p>
+                            {% endfor %}
+                        {% endif %}
                         <p>{{ field.label }} {{ field }}<p>
                     {% endfor %}
                     <hr>
                 </div>
-
             {% endfor %}
             <input type="button" value="Добавить событие" onclick="makeVisible()">
             <hr>
