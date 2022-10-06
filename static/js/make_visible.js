@@ -7,7 +7,7 @@ function getInvisibleDiv(){
 }
 
 function getCheckBox(div) {
-    return div.querySelector('input')
+    return div.querySelector("input[type='checkbox']")
 }
 
 function makeVisible(){

@@ -8,18 +8,19 @@
             {{ form.version }}
             <hr>
             {% for f in form if f.id[:8] == 'schedule' %}
-                {% set div_class = 'invisible' %}
+                {% set ns = namespace(div_class = 'invisible') %}
                 {% if f.visible.data %}
-                    {% set div_class = "visible" %}
+                    {% set ns.div_class = '' %}
                 {% endif %}
-                <div class="{{ div_class }}">
+                <div class="{{ ns.div_class }}">
                     {{ f.csrf_token }}
                     <p style="display: none">{{f.visible}}</p>
                     {% for field in f if field.name.split('-')[1] not in ['visible', 'csrf_token'] %}
                         <p>{{ field.label }} {{ field }}<p>
                     {% endfor %}
+                    <hr>
                 </div>
-                <hr>
+
             {% endfor %}
             <input type="button" value="Добавить событие" onclick="makeVisible()">
             <hr>
