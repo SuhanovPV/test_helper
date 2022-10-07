@@ -5,8 +5,15 @@
         <script  type="text/javascript" src="{{ url_for('static', filename='js/make_visible.js') }}"></script>
 
         <form action="" method="post">
-
-            {{ form.version }}
+            {{ form.version.csrf_token }}
+            {% for field in form.version if field.name.split('-')[1] not in ['visible', 'csrf_token'] %}
+                {% if field.errors %}
+                    {% for e in field.errors %}
+                        <p>{{ e }}</p>
+                    {% endfor %}
+                {% endif %}
+                <p>{{ field.label }} {{ field }}</p>
+            {% endfor %}
             <hr>
             {% for f in form if f.id[:8] == 'schedule' %}
                 {% set ns = namespace(div_class = 'invisible') %}
