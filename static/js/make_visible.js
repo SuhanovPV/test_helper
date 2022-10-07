@@ -10,19 +10,22 @@ function getCheckBox(div) {
     return div.querySelector("input[type='checkbox']")
 }
 
-function getDateTimeStart(div) {
-    return div.querySelector("input[type='datetime-local']")
-}
-
-function getDateTimeEnd(div) {
-    return div.querySelectorAll("input[type='datetime-local']")[1]
+function getDateTime(div) {
+    return div.querySelectorAll("input[type='datetime-local']")
 }
 
 // TODO: Изменить на получение старта и конца передачи для текущего и следущего дива, и заменой времени для них
 function set_start_time(cur_div, prev_div) {
-    prev_end_time = getDateTimeEnd(prev_div)
-    start_time = getDateTimeStart(cur_div);
-    start_time.value = prev_end_time.value
+    current_div_time = getDateTime(cur_div);
+    prev_end_time = getDateTime(prev_div)[1].value;
+
+    current_div_time[0].value = prev_end_time;
+
+    date = new Date(prev_end_time);
+    date.setMinutes(date.getMinutes() + 5);
+
+    current_div_time[1].value = date.toLocaleDateString();
+
 }
 
 function makeVisible(){
