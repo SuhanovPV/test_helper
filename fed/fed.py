@@ -4,11 +4,6 @@ from fed import data_formatter
 
 fed = Blueprint('fed', __name__)
 
-# TODO Перенести получение меню в отдельный модуль
-
-menu = [{'title': 'Главная', 'url': 'index'},
-        {'title': 'Создать json для контета дня', 'url': 'fed.index'}]
-
 
 @fed.route('/', methods=["POST", "GET"])
 def index():
@@ -16,7 +11,6 @@ def index():
     channel_list = data_formatter.get_channel_list()
     genres_list = data_formatter.get_genres_list()
     language_list = data_formatter.get_language_list()
-
 
     for f in form:
         if f.name[:8] == 'schedule':
