@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, SelectField, TextAreaField, FormField, SubmitField, \
+from wtforms.fields import StringField, IntegerField, SelectField, TextAreaField, FormField, SubmitField, \
     BooleanField, DateTimeLocalField
 from wtforms.validators import NumberRange, ValidationError
 from wtforms.widgets import DateTimeLocalInput
@@ -15,7 +15,6 @@ def value_in_range_if_set(min_val, max_val):
     message = f"Значение должно быть в диапазоне от {min_val} до {max_val} включительно"
 
     def _value_in_range_if_set(form, field):
-        print(field.data)
         if form.visible.data and field.data is not None:
             if field.data > max_val or field.data < min_val:
                 raise ValidationError(message)
@@ -24,12 +23,13 @@ def value_in_range_if_set(min_val, max_val):
 
 
 class Schedule(FlaskForm):
+    # .replace(second=0, microsecond=0)
     visible = BooleanField("Visible")
     title = StringField("Заголовок", validators=[required_if_visible])
-    start_time = DateTimeLocalField("Начало",
+    start_time = DateTimeLocalField("Начало", format='%Y-%m-%dT%H:%M',
                                     default=datetime.now().replace(second=0, microsecond=0) + timedelta(minutes=5),
                                     validators=[required_if_visible], widget=DateTimeLocalInput())
-    end_time = DateTimeLocalField("Конец",
+    end_time = DateTimeLocalField("Конец", format='%Y-%m-%dT%H:%M',
                                   default=datetime.now().replace(second=0, microsecond=0) + timedelta(minutes=10),
                                   validators=[required_if_visible], widget=DateTimeLocalInput())
     channel_id = SelectField("Канал", choices=[])

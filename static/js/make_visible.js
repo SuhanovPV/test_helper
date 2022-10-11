@@ -14,7 +14,6 @@ function getDateTime(div) {
     return div.querySelectorAll("input[type='datetime-local']")
 }
 
-// TODO: Изменить на получение старта и конца передачи для текущего и следущего дива, и заменой времени для них
 function set_start_time(cur_div, prev_div) {
     var current_div_time = getDateTime(cur_div);
     var prev_end_time = getDateTime(prev_div)[1].value;
@@ -25,7 +24,7 @@ function set_start_time(cur_div, prev_div) {
     date.setMinutes(date.getMinutes() + 5);
 
     var s = date.toISOString().split('T');
-    current_div_time[1].value = s[0] + ' ' + s[1].slice(0, 8);
+    current_div_time[1].value = s[0] + 'T' + s[1].slice(0, 8);
 }
 
 function makeVisible(){
