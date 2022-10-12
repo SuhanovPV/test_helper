@@ -59,5 +59,13 @@ class Version(FlaskForm):
 class CompositeForm(FlaskForm):
     schedule1 = FormField(Schedule)
     schedule2 = FormField(Schedule)
+    schedule3 = FormField(Schedule)
+    schedule4 = FormField(Schedule)
+    schedule5 = FormField(Schedule)
+    schedule6 = FormField(Schedule)
+    schedule7 = FormField(Schedule)
+    schedule8 = FormField(Schedule)
+    schedule9 = FormField(Schedule)
+    schedule10 = FormField(Schedule)
     version = FormField(Version)
     submit = SubmitField("Создать")

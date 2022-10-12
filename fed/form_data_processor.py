@@ -1,3 +1,6 @@
+from fed.event import Event
+
+
 def get_field_name(field):
     return field.name.split('-')[1]
 
@@ -11,20 +14,12 @@ def form_to_dict(form):
     return data
 
 
-def get_version(form):
-    return form_to_dict(form)
-
-
-def get_event(form):
-    event = form_to_dict(form)
-    print(event)
-    return ''
-
-
 def get_data_from_forms(forms):
     events = []
     for f in forms:
         if f.name == 'version':
-            version = get_version(f)
+            version = form_to_dict(f)
         elif f.visible.data:
-            events.append(get_event(f))
+            event = Event(**form_to_dict(f))
+            events.append(event.get_event())
+    print(events)

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, session
+from flask import Blueprint, render_template, request, session, redirect, url_for
 
 import fed.form_data_processor
 import utils
@@ -30,7 +30,7 @@ def index():
 
         if is_valid:
             form_data_processor.get_data_from_forms([f for f in form if f.name not in ['submit', 'csrf_token']])
-            return "ПРИВЕТ"
+            return redirect(url_for('index'))
 
     if request.method == 'GET':
         form.schedule1.form.visible.process_data(True)

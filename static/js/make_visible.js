@@ -18,13 +18,13 @@ function set_start_time(cur_div, prev_div) {
     var current_div_time = getDateTime(cur_div);
     var prev_end_time = getDateTime(prev_div)[1].value;
 
+    console.log(prev_end_time);
     current_div_time[0].value = prev_end_time;
 
-    var date = new Date(prev_end_time);
-    date.setMinutes(date.getMinutes() + 5);
-
-    var s = date.toISOString().split('T');
-    current_div_time[1].value = s[0] + 'T' + s[1].slice(0, 8);
+    var d = new Date(prev_end_time);
+    d.setMinutes(d.getMinutes() + 5);
+    d.setHours(d.getHours() + 3);
+    current_div_time[1].value = d.toJSON().slice(0, 16);
 }
 
 function makeVisible(){
