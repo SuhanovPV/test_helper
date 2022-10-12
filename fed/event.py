@@ -19,9 +19,10 @@ class Event:
         if kwargs['parental_rating']:
             self.parental_rating = int(kwargs['parental_rating'])
         if kwargs['production_date']:
-            self.production_date = self._get_genre(kwargs['production_date'])
+            self.production_date = kwargs['production_date']
         if kwargs['star_rating']:
-            self.star_rating = self._get_genre(kwargs['star_rating'])
+            self.star_rating = kwargs['star_rating']
+
 
     def _get_transport_stream(self):
         ts = {'original_network_id': self._channel.original_network_id,
@@ -33,6 +34,7 @@ class Event:
         return self._channel.epg_id
 
     def _get_genre(self, id):
+        print(id)
         genre = db_data_processor.get_genre(id)
         return genre.code
 

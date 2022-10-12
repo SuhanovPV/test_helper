@@ -20,6 +20,7 @@ def get_data_from_forms(forms):
         if f.name == 'version':
             version = form_to_dict(f)
         elif f.visible.data:
+            pass
             event = Event(**form_to_dict(f))
             events.append(event.get_event())
-    print(events)
+    return events

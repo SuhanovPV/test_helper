@@ -1,3 +1,46 @@
+.mainmenu li{
+    display:  inline-block;
+    margin-right: -4px;
+    background-color: #CCE4FA;
+}
+.mainmenu ul {
+    padding-left: 0px;
+}
+
+
+.mainmenu a {
+    font-size: 1em;
+    color: #168DFE;
+    font-family: sans-serif;
+    font-weight: bolder;
+    display:  block;
+    padding: 10px 15px;
+}
+
+.mainmenu a:hover {
+    color: white;
+}
+
+.mainmenu li:hover {
+    background-color: #168DFE;
+}
+
 div .invisible {
     display: none;
+}
+
+div .version-element {
+    font-family: sans-serif;
+    font-size: 0.9em;
+    display:  inline-block;
+}
+
+.version-element input[type=number] {
+    font-size: 1em;
+    width: 40px;
+    height: 22px;
+}
+
+.errors {
+    color: red;
 }

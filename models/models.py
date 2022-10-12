@@ -18,7 +18,7 @@ class Channels(db.Model):
 class Genres(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(75), nullable=False)
-    code = db.Column(db.Integer, primary_key=True)
+    code = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
         return f"<genres: {self.id}>"
