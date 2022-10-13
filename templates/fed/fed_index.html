@@ -9,14 +9,23 @@
             <div class="fed-version">
                 {% for field in form.version %}
                     {% if field.errors %}
-                        {% for e in field.errors %}
-                            <p class="errors">{{ e }}</p>
-                        {% endfor %}
+                        <div class="errors">
+                            {% for e in field.errors %}
+                                <p>{{ e }}</p>
+                            {% endfor %}
+                        </div>
                     {% endif %}
                 {% endfor %}
+                <div class="version-element">
+                    <p>Версия:</p>
+                </div>
                 {% for field in form.version if field.name.split('-')[1] not in ['visible', 'csrf_token'] %}
                     <div class="version-element">
-                        <p>{{ field.label }} {{ field }}</p>
+                        {% if field.errors %}
+                            <p class="errors">{{ field }}</p>
+                        {% else %}
+                            <p>{{ field }}</p>
+                        {% endif %}
                     </div>
                 {% endfor %}
             </div>
