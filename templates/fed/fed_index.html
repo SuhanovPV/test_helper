@@ -32,12 +32,16 @@
             {% for f in form if f.id[:8] == 'schedule' %}
                 {% set ns = namespace(div_class = 'invisible') %}
                 {% if f.visible.data %}
-                    {% set ns.div_class = '' %}
+                    {% set ns.div_class = 'schedule' %}
                 {% endif %}
                 <div class="{{ ns.div_class }}">
                     {{ f.csrf_token }}
                     <p style="display: none">{{f.visible}}</p>
-                    {% for field in f if field.name.split('-')[1] not in ['visible', 'csrf_token'] %}
+                    <div class="left">
+                        <div class="title"><p>{{ f.title.label}}: {{ f.title}}</div>
+                        <div class="time">Время: <span>{{ f.start_time }} - {{ f.end_time }}</span></div>
+                    </div>
+                    {% for field in f if field.name.split('-')[1] not in ['visible', 'csrf_token', 'title', 'start_time', 'end_time'] %}
                         {% if field.errors %}
                             {% for e in field.errors %}
                                 <p>{{ e }}</p>
@@ -45,7 +49,6 @@
                         {% endif %}
                         <p>{{ field.label }} {{ field }}<p>
                     {% endfor %}
-                    <hr>
                 </div>
             {% endfor %}
             <input type="button" value="Добавить событие" onclick="makeVisible()">
