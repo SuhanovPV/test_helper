@@ -62,8 +62,6 @@ textarea {
     font-size: 1em;   
 }
 
-
-
 div .version-element {
     font-family: sans-serif;
     font-size: 0.9em;
@@ -72,6 +70,10 @@ div .version-element {
 
 .version-element input[type=number] {
     width: 40px;
+}
+
+div .left {
+    width: 35%;
 }
 /*
 
