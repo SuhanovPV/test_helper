@@ -73,8 +73,37 @@ div .version-element {
 }
 
 div .left {
-    width: 35%;
+    width: 40%;
 }
+
+div .label {
+    display: inline-block;
+    border: 2px solid green;
+    width: 25%;
+}
+
+div .input {
+    border: 2px solid red;
+    display: inline-block;
+    width: 73%;
+}
+
+.input input[type=text] {
+    width:  100%;
+}
+
+.input input[type=datetime-local]{
+    width: 45%;
+}
+
+.input input[type=datetime-local]:first-child {
+    color: red;
+}
+.input input[type=datetime-local]:last-child {
+    color: GREEN;
+    float: right;
+}
+
 /*
 
 div .errors {

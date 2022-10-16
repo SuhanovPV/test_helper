@@ -38,8 +38,13 @@
                     {{ f.csrf_token }}
                     <p style="display: none">{{f.visible}}</p>
                     <div class="left">
-                        <div class="title"><p>{{ f.title.label}}: {{ f.title}}</div>
-                        <div class="time">Время: <span>{{ f.start_time }} - {{ f.end_time }}</span></div>
+                        <div>
+                            <div class="label">{{ f.title.label}}</div><div class="input">{{ f.title}}</div>
+                        </div>
+                        <div>
+                            <div class="label"><label>Время</label></div>
+                            <div class="input">{{ f.start_time }} - {{ f.end_time }}</div>
+                        </div>
                     </div>
                     {% for field in f if field.name.split('-')[1] not in ['visible', 'csrf_token', 'title', 'start_time', 'end_time'] %}
                         {% if field.errors %}
