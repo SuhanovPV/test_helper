@@ -1,33 +1,57 @@
 {% extends 'base.html' %}
 {% block content%}
-    {{ super() }}
-    <div>
-        <script  type="text/javascript" src="{{ url_for('static', filename='js/make_visible.js') }}"></script>
-
-        <form action="" method="post">
-            {{ form.version.csrf_token }}
-            <div class="fed-version">
-                {% for field in form.version %}
-                    {% if field.errors %}
-                        <div class="errors">
-                            {% for e in field.errors %}
-                                <p>{{ e }}</p>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                {% endfor %}
-                <div class="version-element">
-                    <p>Версия:</p>
+{{ super() }}
+<div>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/make_visible.js') }}"></script>
+    <form action="" method="post">
+        {{ form.version.csrf_token }}
+        <div class="version input">
+            {% for field in form.version %}
+                {% if field.errors %}
+                <div>
+                    {% for e in field.errors %}
+                    <p>{{ e }}</p>
+                    {% endfor %}
                 </div>
-                {% for field in form.version if field.name.split('-')[1] not in ['visible', 'csrf_token'] %}
-                    <div class="version-element">
-                        {% if field.errors %}
-                            <p class="errors">{{ field }}</p>
-                        {% else %}
-                            <p>{{ field }}</p>
-                        {% endif %}
-                    </div>
+                {% endif %}
+            {% endfor %}
+            <p class="input-label">Версия:</p>
+            <div class="abs-pos">
+            {% for field in form.version if field.name.split('-')[1] not in ['visible', 'csrf_token'] %}
+                {{ field(class_="input-field") }}
+            {% endfor %}
+            </div>
+        </div>
+
+        {% for f in form if f.id[:8] == 'schedule' %}
+            {% set ns = namespace(div_class = 'invisible') %}
+
+            {% if f.visible.data %}
+                {% set ns.div_class = '' %}
+            {% endif %}
+            <div class="{{ ns.div_class }} schedule">
+                <p class="schedule-title">Событие #{{f.id[8:]}}</p>
+                {{ f.csrf_token }}
+                {{f.visible(class_="not-displayed")}}
+
+                <div class="input">{{ f.title.label(class_="input-label") }} {{ f.title(class_="input-field abs-pos w-450") }}</div>
+                <div class="input"><p class="input-label">Время:</p></div>
+
+                <!--
+                {% for field in f if field.name.split('-')[1] not in ['csrf_token', 'start_time', 'end_time', 'visible', 'title'] %}
+                    {% if field.errors %}
+                        {% for e in field.errors %}
+                            {{ e(class_="error") }}
+                        {% endfor %}
+                    {% endif %}
+                    <div class="input">{{ field.label(class_="input-label") }} {{ field(class_="input-field abs-pos") }}</div>
                 {% endfor %}
+                -->
+            </div>
+        {% endfor %}
+
+
+            <!--
             </div>
             {% for f in form if f.id[:8] == 'schedule' %}
                 {% set ns = namespace(div_class = 'invisible') %}
@@ -37,16 +61,16 @@
                 <div class="{{ ns.div_class }}">
                     {{ f.csrf_token }}
                     <p style="display: none">{{f.visible}}</p>
-                    <div class="left">
+                    <div>
                         <div>
-                            <div class="label">{{ f.title.label}}</div><div class="input">{{ f.title}}</div>
+                            <div>{{ f.title.label}}</div><div class="input">{{ f.title}}</div>
                         </div>
                         <div>
-                            <div class="label"><label>Время</label></div>
-                            <div class="input">{{ f.start_time }} - {{ f.end_time }}</div>
+                            <div><label>Время</label></div>
+                            <div>{{ f.start_time }} - {{ f.end_time }}</div>
                         </div>
                     </div>
-                    {% for field in f if field.name.split('-')[1] not in ['visible', 'csrf_token', 'title', 'start_time', 'end_time'] %}
+                    {% for field in f if field.name.split('-')[1] not in ['csrf_token'] %}
                         {% if field.errors %}
                             {% for e in field.errors %}
                                 <p>{{ e }}</p>
@@ -57,9 +81,10 @@
                 </div>
             {% endfor %}
             <input type="button" value="Добавить событие" onclick="makeVisible()">
-            <hr>
+            <hr>-->
+            <input type="button" value="Добавить событие" onclick="makeVisible()">
             {{ form.submit }}
-        </form>
-    </div>
+    </form>
+</div>
 
 {% endblock %}

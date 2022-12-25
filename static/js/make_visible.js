@@ -29,10 +29,11 @@ function set_start_time(cur_div, prev_div) {
 
 function makeVisible(){
     var div = getInvisibleDiv();
+    console.log(div);
     if (div) {
         var checkbox = getCheckBox(div);
         checkbox.checked = true;
-        set_start_time(div, div.previousElementSibling);
         div.classList.remove('invisible');
+        /*set_start_time(div, div.previousElementSibling);*/
     }
 }

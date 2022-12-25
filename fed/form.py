@@ -25,7 +25,7 @@ def value_in_range_if_set(min_val, max_val):
 class Schedule(FlaskForm):
     # .replace(second=0, microsecond=0)
     visible = BooleanField("Visible")
-    title = StringField("Заголовок", validators=[required_if_visible])
+    title = StringField("Заголовок:", validators=[required_if_visible])
     start_time = DateTimeLocalField("Начало", format='%Y-%m-%dT%H:%M',
                                     default=datetime.now().replace(second=0, microsecond=0) + timedelta(minutes=5),
                                     validators=[required_if_visible], widget=DateTimeLocalInput())
@@ -51,7 +51,7 @@ class Schedule(FlaskForm):
 
 
 class Version(FlaskForm):
-    build = IntegerField("Version", default=0, validators=[NumberRange(min=0)])
+    build = IntegerField("Version", default=2, validators=[NumberRange(min=2, max=2)])
     subversion = IntegerField("Subversion", default=0, validators=[NumberRange(min=0)])
     version = IntegerField("Build", default=0, validators=[NumberRange(min=0)])
 
