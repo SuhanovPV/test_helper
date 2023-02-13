@@ -32,14 +32,14 @@ class Schedule(FlaskForm):
     end_time = DateTimeLocalField("Конец", format='%Y-%m-%dT%H:%M',
                                   default=datetime.now().replace(second=0, microsecond=0) + timedelta(minutes=10),
                                   validators=[required_if_visible], widget=DateTimeLocalInput())
-    channel_id = SelectField("Канал", choices=[])
-    content = SelectField("Категория", choices=[])
-    parental_rating = IntegerField("Возрастное ограничение", default=0,
-                                   validators=[value_in_range_if_set(0, 18)])
+    channel_id = SelectField("Канал:", choices=[])
+    content = SelectField("Категория:", choices=[])
+    parental_rating = IntegerField("ВО:", default=0,
+                                   validators=[NumberRange(min=0, max=18)])
     episode_number = StringField("Номер эпизода: ")
-    production_date = StringField("Дата выпуска программы")
-    star_rating = StringField("Рейтинг события")
-    language = SelectField("Язык", choices=[])
+    production_date = StringField("Год выпуска")
+    star_rating = StringField("Рейтинг:")
+    language = SelectField("Язык:", choices=[])
     actors = StringField("Актеры программы")
     directors = StringField("Режиссеры программы")
     presenters = StringField("Имена ведущих программы")

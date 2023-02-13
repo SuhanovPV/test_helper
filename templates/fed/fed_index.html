@@ -35,9 +35,21 @@
                 {{f.visible(class_="not-displayed")}}
 
                 <div class="input">{{ f.title.label(class_="input-label") }} {{ f.title(class_="input-field abs-pos w-450") }}</div>
-                <div class="input"><p class="input-label">Время:</p></div>
+                <div class="input"><span class="input-label">Время:</span> <span class="abs-pos">{{ f.start_time(class_="input-field date") }}{{ f.end_time(class_="input-field date")}}</span></div>
+                <div class="input">{{ f.channel_id.label(class_="input-label") }} {{ f.channel_id(class_="input-field abs-pos w-450") }}</div>
+                <div class="input">{{ f.content.label(class_="input-label") }} {{ f.content(class_="input-field abs-pos w-450") }}</div>
+                <div class="input">{{ f.parental_rating.label(class_="input-label") }} {{ f.parental_rating(class_="input-field abs-pos w-450") }}</div>
+                <div class="input">{{ f.content.label(class_="input-label") }} {{ f.content(class_="input-field abs-pos w-450") }}</div>
+                <div class="input">{{ f.episode_number.label(class_="input-label") }} {{ f.episode_number(class_="input-field abs-pos w-450") }}</div>
+                <div class="input">{{ f.production_date.label(class_="input-label") }} {{ f.production_date(class_="input-field abs-pos w-450") }}</div>
+                <div class="input">{{ f.star_rating.label(class_="input-label") }} {{ f.star_rating(class_="input-field abs-pos w-450") }}</div>
+                <div class="input">{{ f.language.label(class_="input-label") }} {{ f.language(class_="input-field abs-pos w-450") }}</div>
+
+
+
 
                 <!--
+                <div class="input">{{ f.start_time.label(class_="input-label")}} {{ f.start_time(class_="input-field abs-pos date-time") }}</div>
                 {% for field in f if field.name.split('-')[1] not in ['csrf_token', 'start_time', 'end_time', 'visible', 'title'] %}
                     {% if field.errors %}
                         {% for e in field.errors %}
