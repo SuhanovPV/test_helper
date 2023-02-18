@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content%}
 {{ super() }}
-<div>
+<div xmlns="http://www.w3.org/1999/html">
     <script type="text/javascript" src="{{ url_for('static', filename='js/make_visible.js') }}"></script>
     <form action="" method="post">
         {{ form.version.csrf_token }}
@@ -37,28 +37,18 @@
                 <div class="input">{{ f.title.label(class_="input-label") }} {{ f.title(class_="input-field abs-pos w-450") }}</div>
                 <div class="input"><span class="input-label">Время:</span> <span class="abs-pos">{{ f.start_time(class_="input-field date") }}{{ f.end_time(class_="input-field date")}}</span></div>
                 <div class="input">{{ f.channel_id.label(class_="input-label") }} {{ f.channel_id(class_="input-field abs-pos w-450") }}</div>
-                <div class="input">{{ f.content.label(class_="input-label") }} {{ f.content(class_="input-field abs-pos w-450") }}</div>
-                <div class="input">{{ f.parental_rating.label(class_="input-label") }} {{ f.parental_rating(class_="input-field abs-pos w-450") }}</div>
-                <div class="input">{{ f.content.label(class_="input-label") }} {{ f.content(class_="input-field abs-pos w-450") }}</div>
-                <div class="input">{{ f.episode_number.label(class_="input-label") }} {{ f.episode_number(class_="input-field abs-pos w-450") }}</div>
-                <div class="input">{{ f.production_date.label(class_="input-label") }} {{ f.production_date(class_="input-field abs-pos w-450") }}</div>
-                <div class="input">{{ f.star_rating.label(class_="input-label") }} {{ f.star_rating(class_="input-field abs-pos w-450") }}</div>
-                <div class="input">{{ f.language.label(class_="input-label") }} {{ f.language(class_="input-field abs-pos w-450") }}</div>
 
+                <div class="input add-option">
+                    <input type="checkbox" id="checkbox-{{f.name}}" class="optional-checkbox">
+                    <label for="checkbox-{{f.name}}" class="input-label optional-checkbox-label">дополнительные параметры</label>
+                </div>
 
-
-
-                <!--
-                <div class="input">{{ f.start_time.label(class_="input-label")}} {{ f.start_time(class_="input-field abs-pos date-time") }}</div>
-                {% for field in f if field.name.split('-')[1] not in ['csrf_token', 'start_time', 'end_time', 'visible', 'title'] %}
-                    {% if field.errors %}
-                        {% for e in field.errors %}
-                            {{ e(class_="error") }}
-                        {% endfor %}
-                    {% endif %}
-                    <div class="input">{{ field.label(class_="input-label") }} {{ field(class_="input-field abs-pos") }}</div>
+                <div class="optional-invisible">
+                {% for field in f if field.name.split('-')[1] not in ['csrf_token', 'start_time', 'end_time', 'visible',
+                'title', 'channel_id', 'short_description', 'full_description'] %}
+                    <div class="input">{{ field.label(class_="input-label") }} {{ field(class_="input-field abs-pos w-450") }}</div>
                 {% endfor %}
-                -->
+                </div>
             </div>
         {% endfor %}
 

@@ -56,14 +56,16 @@ a.current,
 }
 
 /* FORM */
+#version-build {
+  pointer-events: none;
+}
+
 .schedule-title {
   font-size: 1.2em;
   font-weight: 700;
   padding: 0 15px;
   margin: 25px 0 0 0;
 }
-
-
 
 .input {
   display: flex;
@@ -75,7 +77,6 @@ a.current,
 .input-field[type=number] {
   text-align: right;
 }
-
 
 .input-label {
   margin: 0;
@@ -116,6 +117,34 @@ select.w-450 {
  width: 215px;
 }
 
+.optional-checkbox {
+  position: absolute;
+  opacity: 0%;
+}
+
+.optional-invisible {
+  display: none;
+}
+
+.optional-checkbox-label::after {
+  content: 	" \25B7";
+}
+
+.optional-checkbox-label::before {
+  content: 	"Показать ";
+}
+
+.optional-checkbox:checked + .optional-checkbox-label::before {
+  content: "Скрыть ";
+}
+
+.optional-checkbox:checked + .optional-checkbox-label::after {
+  content: " 	\25BD";
+}
+
+.add-option:has(.optional-checkbox:checked) + .optional-invisible {
+  display:block;
+}
 
 /**/
 

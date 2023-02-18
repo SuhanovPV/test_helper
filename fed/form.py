@@ -25,29 +25,30 @@ def value_in_range_if_set(min_val, max_val):
 class Schedule(FlaskForm):
     # .replace(second=0, microsecond=0)
     visible = BooleanField("Visible")
-    title = StringField("Заголовок:", validators=[required_if_visible])
+    title = StringField("Заголовок*:", validators=[required_if_visible])
     start_time = DateTimeLocalField("Начало", format='%Y-%m-%dT%H:%M',
                                     default=datetime.now().replace(second=0, microsecond=0) + timedelta(minutes=5),
                                     validators=[required_if_visible], widget=DateTimeLocalInput())
     end_time = DateTimeLocalField("Конец", format='%Y-%m-%dT%H:%M',
                                   default=datetime.now().replace(second=0, microsecond=0) + timedelta(minutes=10),
                                   validators=[required_if_visible], widget=DateTimeLocalInput())
-    channel_id = SelectField("Канал:", choices=[])
+    channel_id = SelectField("Канал*:", choices=[])
     content = SelectField("Категория:", choices=[])
     parental_rating = IntegerField("ВО:", default=0,
                                    validators=[NumberRange(min=0, max=18)])
+    language = SelectField("Язык:*", choices=[])
     episode_number = StringField("Номер эпизода: ")
     production_date = StringField("Год выпуска")
     star_rating = StringField("Рейтинг:")
-    language = SelectField("Язык:", choices=[])
-    actors = StringField("Актеры программы")
-    directors = StringField("Режиссеры программы")
-    presenters = StringField("Имена ведущих программы")
-    producers = StringField("Продюсеры программы")
-    production_country = StringField("Страна производства программы")
-    writers = StringField("Сценаристы программы")
-    short_description = TextAreaField("Краткое описание события")
-    full_description = TextAreaField("Полное описание события")
+
+    production_country = StringField("Страна:")
+    actors = StringField("Актеры:")
+    directors = StringField("Режиссеры:")
+    presenters = StringField("Ведущие:")
+    producers = StringField("Продюсеры:")
+    writers = StringField("Сценаристы:")
+    short_description = TextAreaField("Краткое описание:")
+    full_description = TextAreaField("Полное описание:")
 
 
 class Version(FlaskForm):
