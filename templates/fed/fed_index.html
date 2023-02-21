@@ -18,7 +18,7 @@
             <p class="input-label">Версия:</p>
             <div class="abs-pos">
             {% for field in form.version if field.name.split('-')[1] not in ['visible', 'csrf_token'] %}
-                {{ field(class_="input-field") }}
+                {{ field(class_="input-field margin-0005") }}
             {% endfor %}
             </div>
         </div>
@@ -34,9 +34,9 @@
                 {{ f.csrf_token }}
                 {{f.visible(class_="not-displayed")}}
 
-                <div class="input">{{ f.title.label(class_="input-label") }} {{ f.title(class_="input-field abs-pos w-450") }}</div>
-                <div class="input"><span class="input-label">Время:</span> <span class="abs-pos">{{ f.start_time(class_="input-field date") }}{{ f.end_time(class_="input-field date")}}</span></div>
-                <div class="input">{{ f.channel_id.label(class_="input-label") }} {{ f.channel_id(class_="input-field abs-pos w-450") }}</div>
+                <div class="input">{{ f.title.label(class_="input-label") }} {{ f.title(class_="input-field margin-0005 abs-pos w-450") }}</div>
+                <div class="input"><span class="input-label">Время:</span> <span class="abs-pos">{{ f.start_time(class_="input-field margin-0005 date") }}{{ f.end_time(class_="input-field margin-0005 date")}}</span></div>
+                <div class="input">{{ f.channel_id.label(class_="input-label") }} {{ f.channel_id(class_="input-field margin-0005 abs-pos w-450") }}</div>
 
                 <div class="input add-option">
                     <input type="checkbox" id="checkbox-{{f.name}}" class="optional-checkbox">
@@ -46,8 +46,10 @@
                 <div class="optional-invisible">
                 {% for field in f if field.name.split('-')[1] not in ['csrf_token', 'start_time', 'end_time', 'visible',
                 'title', 'channel_id', 'short_description', 'full_description'] %}
-                    <div class="input">{{ field.label(class_="input-label") }} {{ field(class_="input-field abs-pos w-450") }}</div>
+                    <div class="input">{{ field.label(class_="input-label") }} {{ field(class_="input-field margin-0005 abs-pos w-450") }}</div>
                 {% endfor %}
+                    <div class="input-textarea ">{{ f.short_description.label(class_="input-label") }} {{ f.short_description(class_="input-field margin-0000 w-450") }}</div>
+                    <div class="input-textarea ">{{ f.full_description.label(class_="input-label") }} {{ f.full_description(class_="input-field margin-0005 w-450") }}</div>
                 </div>
             </div>
         {% endfor %}

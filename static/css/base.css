@@ -32,7 +32,6 @@ body {
 
 .mainmenu li {
   position: relative;
-
   text-align: center;
 }
 
@@ -74,6 +73,13 @@ a.current,
   margin: 15px 0;
 }
 
+.input-textarea {
+  display: flex;
+  /*align-items: center;*/
+  min-height: 2rem;
+  margin: 15px 0;
+}
+
 .input-field[type=number] {
   text-align: right;
 }
@@ -85,12 +91,19 @@ a.current,
 }
 
 .input-field {
-  margin: 0 0 0 5px;
   padding: 5px;
   font-size: 1.1rem;
-  border-radius: 7px;
+  border-radius: 3px;
   border: 2px solid var(--menu);
   justify-content: space-between;
+}
+
+.margin-0005 {
+  margin: 0 0 0 5px;
+}
+
+.margin-0000 {
+  margin: 0 0 0 0px;
 }
 
 .w-450 {
@@ -98,6 +111,7 @@ a.current,
 }
 
 select.w-450 {
+  height: 35px;
   width: 464px;
 }
 
@@ -115,6 +129,12 @@ select.w-450 {
 
 .date {
  width: 215px;
+}
+
+textarea {
+  min-width: 450px;
+  max-width: 450px;
+  min-height: 2rem;
 }
 
 .optional-checkbox {
